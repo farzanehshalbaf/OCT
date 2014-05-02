@@ -1,0 +1,48 @@
+ CMISS Version 1.21 ipinit File Version 3
+ Heading:
+ 
+ CMISS Version 1.21 ipinit File Version 3
+ Heading:
+ 
+ Are any bdry conditions time-varying [N]? N
+ Specify whether initial solution is [1]:
+   (1) Zero
+   (2) Read in
+   (3) Restart from previous solution
+    1
+ Essential boundary conditions defined at nodes:
+ Enter node #s/name [EXIT]: 213
+ Dependent variable number 1 :
+ The value of the dependent variable is [no b.c.]: 0.0
+ The value of derivative number 1 is [no b.c.]: 0
+ The value of derivative number 2 is [no b.c.]: 0
+ The value of derivative number 3 is [no b.c.]: 0
+ The value of derivative number 4 is [no b.c.]: 0
+ The value of derivative number 5 is [no b.c.]: 0
+ The value of derivative number 6 is [no b.c.]: 0
+ The value of derivative number 7 is [no b.c.]: 0
+ Enter node #s/name [EXIT]: 0
+ 
+ Flux boundary conditions defined at nodes:
+ Specify whether the flux values are [Exit]:
+   (1) Integrated (W/m^2)
+   (2) Point values (Watts)
+   (3) Proportional to u
+    2
+ Enter node #s/name [EXIT]: external_node
+ Dependent variable number 1 :
+ The value of the dependent variable is [no b.c.]: 0.0
+ The value of derivative number 1 is [no b.c.]: 0
+ The value of derivative number 2 is [no b.c.]: 0
+ The value of derivative number 3 is [no b.c.]: 0
+ The value of derivative number 4 is [no b.c.]: 0
+ The value of derivative number 5 is [no b.c.]: 0
+ The value of derivative number 6 is [no b.c.]: 0
+ The value of derivative number 7 is [no b.c.]: 0
+
+ Enter node #s/name [EXIT]: 0
+ Specify whether the flux values are [Exit]:
+   (1) Integrated (W/m^2)
+   (2) Point values (Watts)
+   (3) Proportional to u
+    0

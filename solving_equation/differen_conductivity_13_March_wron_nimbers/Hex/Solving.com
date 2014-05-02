@@ -1,0 +1,164 @@
+$object='slides_1_26';
+
+## Reading  Geometric Files
+
+fem define parameters;r;${object};example  #Reads parameters needed to define the plate
+fem define coordinates;r;${object};example #Reads in the coordinates used for the plate
+fem define nodes;r;${object}_refined_4;example       #Reads in the 15 nodes to define the plate
+fem define bases;r;${object};example       #Defines a bilinear basis function
+fem define elements;r;${object}_refined_4;example
+
+
+##General Grouping
+
+fem group elem all as all_elements;
+fem group node in elem all_elements as all_nodes;
+fem group elem all external s3=0 as s3_0;
+fem group elem all external s3=1 as s3_1;
+fem group elem all external s2=0 as s2_0;
+fem group elem all external s2=1 as s2_1;
+fem group elem all external s1=0 as s1_0;
+fem group elem all external s1=1 as s1_1;
+
+fem group node in elem s3_0 xi3=0 as xi3_0;
+fem group node in elem s3_1 xi3=1 as xi3_1;
+fem group node in elem s2_0 xi2=0 as xi2_0;
+fem group node in elem s2_1 xi2=1 as xi2_1;
+fem group node in elem s1_0 xi1=0 as xi1_0;
+fem group node in elem s1_1 xi1=1 as xi1_1;
+
+##Specific Grouping ===> Electrode configuration 
+
+fem group elements 1220,2520,516,2752,869,2393,165,2625,870,2394,166,2626,1222,2522,518,2754 as left_return_electrode
+fem group elements 1148,2448,444,3120,797,2321,93,3097,798,2322,94,3098,1115,2450,446,3122 as Right_return_electrode
+fem group elements 140,2600,820,2344,492,2728,1172,2472 as Up_return_electrode
+fem group elements 143,2603,823,2347,1635,2869,1759,2823 as Down_return_electrode
+fem group elements 493,2729,1173,2473,142,2602,822,2346 as injecting_electrode
+
+#### Layer Grouping
+
+
+### RPE ###
+fem group elements 17..24,41..48,65..72,89..96,113..120,137..144,161..168,185..192,209..216 as RPE_1
+fem group elements 233..240,257..264,369..376,393..400,417..424,441..448,465..472,489..496,513..520 as RPE_2
+fem group elements 537..544,561..568,585..592,609..616,721..728,745..752,769..776,793..800,817..824 as RPE_3
+fem group elements 841..848,865..872,889..896,913..920,937..944,961..968,1073..1080,1097..1104 as RPE_4
+fem group elements 1121..1128,1145..1152,1169..1176,1193..1200,1217..1224,1241..1248,1265..1272 as RPE_5
+fem group elements 1289..1296,1313..1320,1425..1432,1449..1456,1489..1496,1513..1520,1553..1560 as RPE_6
+fem group elements 1577..1584,1605..1606,1611..1612,1617..1618,1623..1624,1629..1630,1635..1636 as RPE_7
+fem group elements 1641..1642,1647..1648,1653..1654,1659..1660,1665..1666,1685,1688,1691,1694,1697 as RPE_8
+fem group elements 1700,1703,1706,1711,1714,1717,1733..1734,1739..1740,1747..1748,1753..1754 as RPE_9
+fem group elements 1759..1760,1765..1766,1771..1772,1777..1778,1785..1786,1791..1792,1797..1798 as RPE_10
+fem group elements 1823,1826,1829,1832,1835,1838,1841,1844,1847,1850,1853,1869..1870,1873 as RPE_11
+fem group elements 1881..1882,1885,1893..1894,1897,1903,1906,1909,1912,1915,1918,1921,1924,1927 as RPE_12
+fem group elements 1930,1933,1947,1950,1953,1956,1959,1962,1965,1968,1971,1974,1977,1991,1995,1999 as RPE_13
+fem group elements 2003,2006,2009,2012,2015,2018,2021,2024,2027,2030,2033,2047,2050,2053,2056,2059 as RPE_14
+fem group elements 2062,2065,2068,2071,2074,2077,2091,2094,2097,2100,2103,2106,2109,2112,2115,2118 as RPE_15
+fem group elements 2121,2135,2138,2141,2144,2146,2148,2151,2154,2157,2160,2163,2177,2180,2185,2188 as RPE_16
+fem group elements 2193,2196,2203,2206,2209,2212,2215,2218,2221,2224,2227,2230,2233,2247,2250,2253 as RPE_17
+fem group elements 2256,2259,2262,2265,2268,2271,2274,2277,2291,2295,2299,2317..2324,2341..2348 as RPE_18
+fem group elements 2365..2372,2389..2396,2445..2452,2469..2476,2493..2500,2517..2524,2573..2580 as RPE_19
+fem group elements 2597..2604,2621..2628,2645..2652,2701..2708,2725..2732,2749..2756,2773..2780 as RPE_20
+fem group elements 2817..2818,2823..2824,2829..2830,2835..2836,2841,2844,2847,2850,2863..2864 as RPE_21
+fem group elements 2869..2870,2875..2876,2881..2882,2895,2898,2901,2904,2911,2914,2917,2920,2927 as RPE_22
+fem group elements 2930,2933,2936,2943,2946,2949,2952,2959,2962,2965,2968,2975,2978,2981,2984,2991 as RPE_23
+fem group elements 2993,2995,2998,3007,3010,3013,3016,3023,3026,3029,3032,3061..3068,3093..3100 as RPE_24
+fem group elements 3117..3124,3145..3146,3151,3157..3158,3161,3167,3171,3175,3179,3183,3186,3191,3195,3213..3220 as RPE_25
+fem group elements RPE_1,RPE_2,RPE_3,RPE_4,RPE_5,RPE_6,RPE_7,RPE_8,RPE_9,RPE_10,RPE_11,RPE_12,RPE_13,RPE_14,RPE_15,RPE_16,RPE_17,RPE_18,RPE_19,RPE_20,RPE_21,RPE_22,RPE_23,RPE_24,RPE_25 as RPE_Layer
+####
+
+### ONL ####
+fem group elements 9..16,33..40,57..64,81..88,105..112,129..136,153..160,177..184,201..208,225..232 as ONL_1
+fem group elements 249..256,361..368,385..392,409..416,433..440,457..464,481..488,505..512,529..536 as ONL_2
+fem group elements 553..560,577..584,601..608,713..720,737..744,761..768,785..792,809..816,833..840 as ONL_3
+fem group elements 857..864,881..888,905..912,929..936,953..960,1065..1072,1089..1096,1113..1120 as ONL_4
+fem group elements 1137..1144,1161..1168,1185..1192,1209..1216,1233..1240,1257..1264,1281..1288 as ONL_5
+fem group elements 1305..1312,1417..1424,1441..1448,1481..1488,1505..1512,1545..1552,1569..1576 as ONL_6
+fem group elements 1603..1604,1609..1610,1615..1616,1621..1622,1627..1628,1633..1634,1639..1640 as ONL_7
+fem group elements 1645..1646,1651..1652,1657..1658,1663..1664,1684,1687,1690,1693,1696,1699,1702 as ONL_8
+fem group elements 1705,1708,1713,1716,1731..1732,1737..1738,1743..1744,1751..1752,1757..1758 as ONL_9
+fem group elements 1763..1764,1769..1770,1775..1776,1783..1784,1789..1790,1795..1796,1822,1825,1828 as ONL_10
+fem group elements 1831,1834,1837,1840,1843,1846,1849,1852,1867..1868,1872,1879..1880,1884 as ONL_11
+fem group elements 1891..1892,1896,1902,1905,1908,1911,1914,1917,1920,1923,1926,1929,1932,1946,1949 as ONL_12
+fem group elements 1952,1955,1958,1961,1964,1967,1970,1973,1976,1990,1994,1998,2002,2005,2008,2011 as ONL_13
+fem group elements 2014,2017,2020,2023,2026,2029,2032,2046,2049,2052,2055,2058,2061,2064,2067,2070 as ONL_14
+fem group elements 2073,2076,2090,2093,2096,2099,2102,2105,2108,2111,2114,2117,2120,2134,2137,2140 as ONL_15
+fem group elements 2143,2150,2153,2156,2159,2162,2176,2179,2184,2187,2192,2195,2199..2200,2202,2205 as ONL_16
+fem group elements 2208,2211,2214,2217,2220,2223,2226,2229,2232,2246,2249,2252,2255,2258,2261,2264 as ONL_17
+fem group elements 2267,2270,2273,2276,2290,2294,2298,2309..2316,2333..2340,2357..2364,2381..2388 as ONL_18
+fem group elements 2437..2444,2461..2468,2485..2492,2509..2516,2565..2572,2589..2596,2613..2620 as ONL_19
+fem group elements 2637..2644,2693..2700,2717..2724,2741..2748,2765..2772,2815..2816,2821..2822 as ONL_20
+fem group elements 2827..2828,2833..2834,2840,2843,2846,2849,2861..2862,2867..2868,2873..2874 as ONL_21
+fem group elements 2879..2880,2894,2897,2900,2903,2910,2913,2916,2919,2926,2929,2932,2935,2942,2945 as ONL_22
+fem group elements 2948,2951,2958,2961,2964,2967,2974,2977,2980,2983,2990,2997,3003..3004,3006,3009 as ONL_23
+fem group elements 3012,3015,3022,3025,3028,3031,3053..3060,3085..3092,3109..3116,3143..3144,3150 as ONL_24
+fem group elements 3155..3156,3160,3166,3170,3174,3178,3182,3185,3190,3194,3205..3212 as ONL_25
+fem group elements ONL_1,ONL_2,ONL_3,ONL_4,ONL_5,ONL_6,ONL_7,ONL_8,ONL_9,ONL_10,ONL_11,ONL_12,ONL_13,ONL_14,ONL_15,ONL_16,ONL_17,ONL_18,ONL_19,ONL_20,ONL_21,ONL_22,ONL_23,ONL_24,ONL_25 as ONL_Layer
+#####
+
+#### IPL+INL_GCL+OPL
+fem group elements 1..8,25..32,49..56,73..80,97..104,121..128,145..152,169..176,193..200,217..224 as Ret_1
+fem group elements 241..248,353..360,377..384,401..408,425..432,449..456,473..480,497..504,521..528 as Ret_2
+fem group elements 545..552,569..576,593..600,705..712,729..736,753..760,777..784,801..808,825..832 as Ret_3
+fem group elements 849..856,873..880,897..904,921..928,945..952,1057..1064,1081..1088,1105..1112 as Ret_4
+fem group elements 1129..1136,1153..1160,1177..1184,1201..1208,1225..1232,1249..1256,1273..1280 as Ret_5
+fem group elements 1297..1304,1409..1416,1433..1440,1473..1480,1497..1504,1537..1544,1561..1568 as Ret_6
+fem group elements 1601..1602,1607..1608,1613..1614,1619..1620,1625..1626,1631..1632,1637..1638 as Ret_7
+fem group elements 1643..1644,1649..1650,1655..1656,1661..1662,1683,1686,1689,1692,1695,1698,1701 as Ret_8
+fem group elements 1704,1707,1712,1715,1729..1730,1735..1736,1741..1742,1749..1750,1755..1756 as Ret_9
+fem group elements 1761..1762,1767..1768,1773..1774,1781..1782,1787..1788,1793..1794,1821,1824,1827 as Ret_10
+fem group elements 1830,1833,1836,1839,1842,1845,1848,1851,1865..1866,1871,1877..1878,1883 as Ret_11
+fem group elements 1889..1890,1895,1901,1904,1907,1910,1913,1916,1919,1922,1925,1928,1931,1945,1948 as Ret_12
+fem group elements 1951,1954,1957,1960,1963,1966,1969,1972,1975,1989,1993,1997,2001,2004,2007,2010 as Ret_13
+fem group elements 2013,2016,2019,2022,2025,2028,2031,2045,2048,2051,2054,2057,2060,2063,2066,2069 as Ret_14
+fem group elements 2072,2075,2089,2092,2095,2098,2101,2104,2107,2110,2113,2116,2119,2133,2136,2139 as Ret_15
+fem group elements 2142,2145,2147,2149,2152,2155,2158,2161,2175,2178,2183,2186,2191,2194,2201,2204 as Ret_16
+fem group elements 2207,2210,2213,2216,2219,2222,2225,2228,2231,2245,2248,2251,2254,2257,2260,2263 as Ret_17
+fem group elements 2266,2269,2272,2275,2289,2293,2297,2301..2308,2325..2332,2349..2356,2373..2380 as Ret_18
+fem group elements 2429..2436,2453..2460,2477..2484,2501..2508,2557..2564,2581..2588,2605..2612 as Ret_19
+fem group elements 2629..2636,2685..2692,2709..2716,2733..2740,2757..2764,2813..2814,2819..2820 as Ret_20
+fem group elements 2825..2826,2831..2832,2839,2842,2845,2848,2859..2860,2865..2866,2871..2872 as Ret_21
+fem group elements 2877..2878,2893,2896,2899,2902,2909,2912,2915,2918,2925,2928,2931,2934,2941,2944 as Ret_22
+fem group elements 2947,2950,2957,2960,2963,2966,2973,2976,2979,2982,2989,2992,2994,2996,3005,3008 as Ret_23
+fem group elements 3011,3014,3021,3024,3027,3030,3045..3052,3077..3084,3101..3108,3141..3142,3149 as Ret_24
+fem group elements 3153..3154,3159,3165,3169,3173,3177,3181,3184,3189,3193,3197..3204 as Ret_25
+fem group elements Ret_1,Ret_2,Ret_3,Ret_4,Ret_5,Ret_6,Ret_7,Ret_8,Ret_9,Ret_10,Ret_11,Ret_12,Ret_13,Ret_14,Ret_15,Ret_16,Ret_17,Ret_18,Ret_19,Ret_20,Ret_21,Ret_22,Ret_23,Ret_24,Ret_25 as Retina_Layer
+#####
+
+### Vitreous
+fem group elements 265..352,617..704,969..1056,1321..1408,1457..1472,1521..1536,1585..1600 as VTR_1
+fem group elements 1667..1682,1709..1710,1718..1728,1745..1746,1779..1780,1799..1820,1854..1864 as VTR_2
+fem group elements 1874..1876,1886..1888,1898..1900,1934..1944,1978..1988,1992,1996,2000,2034..2044 as VTR_3
+fem group elements 2078..2088,2122..2132,2164..2174,2181..2182,2189..2190,2197..2198,2234..2244 as VTR_4
+fem group elements 2278..2288,2292,2296,2300,2397..2428,2525..2556,2653..2684,2781..2812,2837..2838 as VTR_5
+fem group elements 2851..2858,2883..2892,2905..2908,2921..2924,2937..2940,2953..2956,2969..2972 as VTR_6
+fem group elements 2985..2988,2999..3002,3017..3020,3033..3044,3069..3076,3125..3140,3147..3148 as VTR_7
+fem group elements 3152,3162..3164,3168,3172,3176,3180,3187..3188,3192,3196 as VTR_8
+fem group elements VTR_1,VTR_2,VTR_3,VTR_4,VTR_5,VTR_6,VTR_7,VTR_8 as Vitreous_Layer
+
+
+### Node specific group 
+
+fem group node external as external_node
+## Reading Laplace files
+fem define equation;r;${object};example 
+fem define material;r;${object};example 
+fem define initial;r;${object};example  
+fem define solve;r;${object};example
+
+## Solving 
+#fem list node solution
+fem solve
+#fem list node solution 
+
+## Visulization
+fem export elem;${object}_refined_1 as ${object}_refined_1
+fem export node;${object}_refined_1 as ${object}_refined_1
+fem export node;laplace_solution_2 as laplace_solution_2 field
+fem export elem;laplace_solution_2 as laplace_solution_2 field
+
+
+
+
+
+
